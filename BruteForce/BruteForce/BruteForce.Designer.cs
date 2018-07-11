@@ -1,6 +1,6 @@
 ﻿namespace BruteForce
 {
-    partial class Form1
+    partial class BruteForce
     {
         /// <summary>
         /// Required designer variable.
@@ -68,7 +68,7 @@
             this.progressBar1.Size = new System.Drawing.Size(249, 23);
             this.progressBar1.TabIndex = 3;
             // 
-            // Form1
+            // BruteForce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,8 +77,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BruteForceButton);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "BruteForce";
+            this.Text = "Brute Force";
             this.ResumeLayout(false);
             this.PerformLayout();
 
