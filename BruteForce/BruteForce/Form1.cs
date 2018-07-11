@@ -16,5 +16,10 @@ namespace BruteForce
         {
             InitializeComponent();
         }
+
+        private void BruteForceButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
