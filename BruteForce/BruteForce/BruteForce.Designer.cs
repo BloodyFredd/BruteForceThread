@@ -31,14 +31,16 @@
             this.BruteForceButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.Loading = new System.Windows.Forms.Label();
+            this.password = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BruteForceButton
             // 
-            this.BruteForceButton.Location = new System.Drawing.Point(179, 65);
+            this.BruteForceButton.Location = new System.Drawing.Point(142, 93);
             this.BruteForceButton.Name = "BruteForceButton";
-            this.BruteForceButton.Size = new System.Drawing.Size(75, 23);
+            this.BruteForceButton.Size = new System.Drawing.Size(46, 23);
             this.BruteForceButton.TabIndex = 0;
             this.BruteForceButton.Text = "Enter";
             this.BruteForceButton.UseVisualStyleBackColor = true;
@@ -61,19 +63,33 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "To enter the site using brute force, please push the button below:";
             // 
-            // progressBar1
+            // Loading
             // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 98);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(249, 23);
-            this.progressBar1.TabIndex = 3;
+            this.Loading.AutoSize = true;
+            this.Loading.Location = new System.Drawing.Point(12, 65);
+            this.Loading.Name = "Loading";
+            this.Loading.Size = new System.Drawing.Size(73, 13);
+            this.Loading.TabIndex = 3;
+            this.Loading.Text = "Please Wait...";
+            this.Loading.Visible = false;
+            // 
+            // password
+            // 
+            this.password.AutoSize = true;
+            this.password.Location = new System.Drawing.Point(12, 98);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(90, 13);
+            this.password.TabIndex = 4;
+            this.password.Text = "The password is: ";
+            this.password.Visible = false;
             // 
             // BruteForce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 145);
-            this.Controls.Add(this.progressBar1);
+            this.ClientSize = new System.Drawing.Size(201, 125);
+            this.Controls.Add(this.password);
+            this.Controls.Add(this.Loading);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BruteForceButton);
@@ -89,7 +105,9 @@
         private System.Windows.Forms.Button BruteForceButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label Loading;
+        private System.Windows.Forms.Label password;
     }
 }
 
