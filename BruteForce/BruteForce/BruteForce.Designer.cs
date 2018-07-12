@@ -93,6 +93,7 @@
             this.CloseButton.TabIndex = 5;
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = false;
+            this.CloseButton.Visible = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // BruteForce

