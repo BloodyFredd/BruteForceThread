@@ -13,6 +13,7 @@ namespace BruteForce
     // The form for the class of the brute force app.
     public partial class BruteForce : Form
     {
+
         // The result would be put in here.
         private static string result;
         private static bool isMatched = false;
@@ -32,6 +33,12 @@ namespace BruteForce
         public BruteForce()
         {
             InitializeComponent();
+            password.BackColor = System.Drawing.Color.Transparent;
+            BruteForceButton.BackColor = System.Drawing.Color.Transparent;
+            Loading.BackColor = System.Drawing.Color.Transparent;
+            welcome.BackColor = System.Drawing.Color.Transparent;
+            label2.BackColor = System.Drawing.Color.Transparent;
+
         }
 
         // The button click to run the brute force.
@@ -39,9 +46,9 @@ namespace BruteForce
         {
             charactersToTestLength = charactersToTest.Length;
             password.Visible = false;
+            BruteForceButton.Visible = false;
             result = "";
             isMatched = false;
-            password.Text = "The password is: ";
             Loading.Visible = true;
             CloseButton.Visible = true;
 
@@ -54,8 +61,9 @@ namespace BruteForce
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
-                        this.password.Text += result;
+                        this.password.Text = "The password is: " + result;
                         this.password.Visible = true;
+                        this.BruteForceButton.Visible = true;
                     });
                     // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
@@ -71,8 +79,9 @@ namespace BruteForce
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
-                        this.password.Text += result;
+                        this.password.Text = "The password is: " + result;
                         this.password.Visible = true;
+                        this.BruteForceButton.Visible = true;
                     });
                     // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
@@ -88,8 +97,9 @@ namespace BruteForce
                     this.Loading.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
                         this.Loading.Visible = false;
-                        this.password.Text += result;
+                        this.password.Text = "The password is: " + result;
                         this.password.Visible = true;
+                        this.BruteForceButton.Visible = true;
                     });
                     // Open the site with the correct password.
                     System.Diagnostics.Process.Start("http://212.143.244.206/auth.php?username=admin&password=" + result);
