@@ -38,6 +38,10 @@ namespace BruteForce
         private void BruteForceButton_Click(object sender, EventArgs e)
         {
             charactersToTestLength = charactersToTest.Length;
+            password.Visible = false;
+            result = "";
+            isMatched = false;
+            password.Text = "The password is: ";
             Loading.Visible = true;
             CloseButton.Visible = true;
 
