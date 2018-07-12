@@ -32,7 +32,6 @@
             this.BruteForceButton = new System.Windows.Forms.Button();
             this.welcome = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Loading = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
@@ -91,7 +90,7 @@
             this.password.AutoSize = true;
             this.password.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.Sienna;
-            this.password.Location = new System.Drawing.Point(151, 69);
+            this.password.Location = new System.Drawing.Point(135, 108);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(108, 15);
             this.password.TabIndex = 4;
@@ -127,7 +126,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.welcome);
             this.Controls.Add(this.BruteForceButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BruteForce";
             this.Text = "Brute Force";
             this.ResumeLayout(false);
@@ -140,7 +139,6 @@
         private System.Windows.Forms.Button BruteForceButton;
         private System.Windows.Forms.Label welcome;
         private System.Windows.Forms.Label label2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label Loading;
         private System.Windows.Forms.Label password;
         private System.Windows.Forms.Button CloseButton;
